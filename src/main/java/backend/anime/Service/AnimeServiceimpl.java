@@ -17,17 +17,13 @@ import java.util.Objects;
 
 @Service
 public class AnimeServiceimpl implements AnimeService{
-
     @Autowired
     MongoTemplate mongoTemplate;
     @Autowired
     AnimesRepostory animesRepostory;
     @Autowired
     UserRepostory userRepostory;
-    @Override
-    public List<Animes> getAnimesAll() {
-        return animesRepostory.findAll();
-    }
+
 
     @Override
     public List<Animes> getByFilter(List<String> geners, List<String> type, List<String> source,
@@ -92,5 +88,11 @@ public class AnimeServiceimpl implements AnimeService{
     @Override
     public User save(User user) {
         return userRepostory.save(user);
+    }
+
+    @Override
+    public List<Animes> getAnimesAll(Integer page, Integer pageSize) {
+        Pageable paging= PageRequest.of(page, pageSize);
+        return animesRepostory.findAll(paging).getContent();
     }
 }

@@ -38,8 +38,11 @@ public class SecurityConfig {
         //jwt filter
         httpSecurity.
                 addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        //login form
         httpSecurity
                 .formLogin(Customizer.withDefaults());
+        httpSecurity.formLogin(login->login.successForwardUrl("/animes/home"));
 
 //        //login form
 //        httpSecurity
