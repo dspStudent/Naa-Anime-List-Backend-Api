@@ -42,7 +42,7 @@ public class SecurityConfig {
         //login form
         httpSecurity
                 .formLogin(Customizer.withDefaults());
-        httpSecurity.formLogin(login->login.successForwardUrl("/animes/home"));
+//        httpSecurity.formLogin(login -> login.successForwardUrl("/animes/"));
 
 //        //login form
 //        httpSecurity

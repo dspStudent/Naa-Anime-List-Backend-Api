@@ -26,12 +26,6 @@ public class AnimesFilterControll {
         return new ResponseEntity<>(animeService.getNameByName(name, page, pageSize), HttpStatus.OK);
     }
 
-    @Autowired
-    AllStatusRepostory completedStatusRepostory;
-    @GetMapping("/get")
-    public ResponseEntity<List<AllStatus>> get(){
-        return ResponseEntity.ok(completedStatusRepostory.findAll());
-    }
     @GetMapping("/filter/")
     @ResponseBody
     public ResponseEntity<List<Animes>> getByFilter (

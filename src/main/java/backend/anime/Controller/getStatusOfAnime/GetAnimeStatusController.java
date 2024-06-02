@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/lock/get")
 public class GetAnimeStatusController {
+
     @Autowired
     GetUserName getUserName;
     @Autowired
