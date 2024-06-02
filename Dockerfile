@@ -10,4 +10,4 @@ RUN ./gradlew clean build
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "build/libs/your-app.jar"]
+CMD ["java", "-jar",  "build/libs/anime-0.0.1-SNAPSHOT.jar"]
