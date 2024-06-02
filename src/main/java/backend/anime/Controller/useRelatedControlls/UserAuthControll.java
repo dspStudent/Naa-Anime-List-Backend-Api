@@ -40,6 +40,7 @@ public class UserAuthControll {
 //    public String index(){
 //        return "redirect:/animes/home";
 //    }
+
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponse> signUp(@RequestBody UserModal userModal) throws UserIsAlredyExistedException {
         Optional<UserDetails> userDetails=userRepostory.findByEmail(userModal.getEmail());
@@ -51,10 +52,12 @@ public class UserAuthControll {
     public ResponseEntity<AuthResponse> loginUser(@RequestBody AuthRequest authRequest) throws UserNotVerfiedException {
         return ResponseEntity.ok(authService.authenicateUser(authRequest));
     }
+
     @GetMapping("/loginOauth")
     public String loginOauth(){
         return "hlo";
     }
+
 //    @GetMapping("/loginCustom")
 //    public String login(){
 //        return "/loginUser";
