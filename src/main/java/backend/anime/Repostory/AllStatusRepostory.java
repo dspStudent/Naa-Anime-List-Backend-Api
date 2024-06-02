@@ -10,4 +10,8 @@ import java.util.Optional;
 public interface AllStatusRepostory extends MongoRepository<AllStatus, ObjectId> {
 
     Optional<AllStatus> findByAnimesAndUserName(Animes animes, String userName);
+
+    Optional<AllStatus> findByAllAnimesStatusAndUserName(String status, String userName);
+
+    Optional<AllStatus> findByAllAnimesStatusIgnoreCaseAndUserName(String status, String userName);
 }

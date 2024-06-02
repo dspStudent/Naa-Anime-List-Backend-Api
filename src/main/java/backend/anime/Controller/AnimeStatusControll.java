@@ -23,6 +23,9 @@ public class AnimeStatusControll {
         String userName=getUserName.getUserNameFromToken();
         return ResponseEntity.ok(animeStatusService.addToUpdate(userName, animes, status));
     }
-//    @PostMapping("/addToFavourite")
-//    public ResponseEntity<String> addToFavourite(@RequestParam(required = true) String anime,)
+    @PostMapping("/addToFavourite")
+    public ResponseEntity<String> addToFavourite(@RequestParam(required = true) String anime){
+        String userName=getUserName.getUserNameFromToken();
+        return ResponseEntity.ok(animeStatusService.addToFavourite(anime, userName));
+    }
 }
