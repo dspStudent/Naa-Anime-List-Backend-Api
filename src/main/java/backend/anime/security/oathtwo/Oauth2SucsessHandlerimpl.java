@@ -55,5 +55,8 @@ public class Oauth2SucsessHandlerimpl implements AuthenticationSuccessHandler {
             Update update=new Update().set("pictureUrl", picture).set("enabled", true);
             mongoTemplate.updateFirst(query, update, User.class);
         }
+        String funnyMessage = "Congratulations! You've been hacked";
+        response.getWriter().write(funnyMessage);
+        response.getWriter().flush();
     }
 }
