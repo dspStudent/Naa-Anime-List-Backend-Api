@@ -1,6 +1,8 @@
 package backend.anime.Controller.useRelatedControlls;
 import backend.anime.Repostory.UserRepostory;
+import backend.anime.Util.GetUserName;
 import backend.anime.email.EmailSevice;
+import backend.anime.entites.usersEntities.PinCode;
 import backend.anime.entites.usersEntities.User;
 import backend.anime.entites.usersEntities.UserModal;
 import backend.anime.exception.exceptionImp.*;
@@ -25,7 +27,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 public class UserAuthControll {
-
+    @Autowired
+    GetUserName getUserName;
     @Autowired
     EmailSevice emailSevice;
     @Autowired
@@ -42,9 +45,11 @@ public class UserAuthControll {
 //    }
 
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponse> signUp(@RequestBody UserModal userModal) throws UserIsAlredyExistedException {
+    public ResponseEntity<SignUpResponse> signUp(@RequestBody UserModal userModal) throws UserIsAlredyExistedException, MessagingException {
         Optional<UserDetails> userDetails=userRepostory.findByEmail(userModal.getEmail());
         if(userDetails.isPresent())throw new UserIsAlredyExistedException("user is presnt alredy");
+
+
         return ResponseEntity.ok(authService.signUpUser(userModal));
     }
 
@@ -61,15 +66,19 @@ public class UserAuthControll {
 //    @GetMapping("/loginCustom")
 //    public String login(){
 //        return "/loginUser";
+//  }
+//
+       //@depricated since 2-6-24
+//    @GetMapping("/verfiy")
+//    public ResponseEntity<String> verfiy() throws MessagingException {
+//        String email=getUserName.getUserNameFromToken();
+//        return ResponseEntity.ok(authService.verifyUser(email));
 //    }
-
-    @GetMapping("/verfiy")
-    public ResponseEntity<String> verfiy(@RequestParam(required = true) String email) throws MessagingException {
-        return ResponseEntity.ok(authService.verifyUser(email));
-    }
     @PostMapping("/enterPin")
     public ResponseEntity<String> enterPinCode(@RequestParam(required = true) String email,
-                                               @RequestParam(required = true) String pinCode) throws MessagingException, UserNotFoundException,  UserVerificationPinIsWrongException, UserVerficationPinExpiredException {
+            @RequestParam(required = true) String pinCode)
+            throws MessagingException, UserNotFoundException,  UserVerificationPinIsWrongException, UserVerficationPinExpiredException {
+
         Query query=new Query(Criteria.where("email").is(email));
         List<User>users=mongoTemplate.find(query, User.class);
         System.out.println(users);
@@ -88,9 +97,10 @@ public class UserAuthControll {
         return ResponseEntity.ok("verfication succefull");
     }
     @PostMapping("/updatePassword")
-    public ResponseEntity<String> updatePassword(@RequestParam(required = true) String email,
-                                                 @RequestParam(required = true) String password,
-                                                 @RequestParam(required = true) String confirmPassword) throws PasswordAndConfrimPasswordsAreWrongException {
+    public ResponseEntity<String> updatePassword(@RequestParam(required = true) String password,
+                                                 @RequestParam(required = true) String confirmPassword)
+            throws PasswordAndConfrimPasswordsAreWrongException {
+        String email=getUserName.getUserNameFromToken();
         if(!password.equals(confirmPassword))
             throw new PasswordAndConfrimPasswordsAreWrongException("password and confrim password should be same");
         return ResponseEntity.ok(authService.upDatePassword(email, password));

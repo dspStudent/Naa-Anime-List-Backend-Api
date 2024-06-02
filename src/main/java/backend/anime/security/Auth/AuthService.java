@@ -40,7 +40,7 @@ public class AuthService {
     EmailSevice emailSevice;
     @Autowired
     PasswordEncoder passwordEncoder;
-    public SignUpResponse signUpUser(UserModal userModal) {
+    public SignUpResponse signUpUser(UserModal userModal) throws MessagingException {
         var user= User.builder()
                 .firstName(userModal.getFirstName())
                 .secondName(userModal.getSecondName())
@@ -48,9 +48,10 @@ public class AuthService {
                 .role("User")
                 .password(passwordEncoder.encode(userModal.getPassword()))
                 .build();
-
+        PinCode pinCode=verifyUser(userModal.getEmail());
+        user.setPinCode(pinCode);
         userRepostory.save(user);
-
+        emailSevice.mailSendTo(userModal.getEmail(), "verfiy you mail", pinCode.getPinCodeNumber()+"     "+"https://naa-anime-list-backend-api.onrender.com/animes/enterPin");
         return SignUpResponse.builder()
                 .message("veyfi your mail")
                 .url("https//localhost:8080/auth/verfiy")
@@ -73,18 +74,16 @@ public class AuthService {
                 .build();
     }
 
-    public String verifyUser(String mail) throws MessagingException {
+    public PinCode verifyUser(String mail) {
         String pinCodeString=generatePinCode();
-        var pinCode= PinCode.builder()
+        return  PinCode.builder()
                 .pinCodeNumber(pinCodeString).
                 issuedAt(LocalDateTime.now())
-                .expiration(LocalDateTime.now().plusSeconds(300));
-        Query query=new Query(Criteria.where("email").is(mail));
-        Update update=new Update().set("pinCode", pinCode);
-        mongoTemplate.updateFirst(query, update, User.class);
-        System.out.println(mongoTemplate.find(query, User.class));
-        emailSevice.mailSendTo(mail, "verfy User", pinCodeString+" \n "+"localhost:8080/auth/enterPin");
-        return "mail sent";
+                .expiration(LocalDateTime.now().plusSeconds(300))
+                .build();
+
+
+
     }
 
     private String generatePinCode() {

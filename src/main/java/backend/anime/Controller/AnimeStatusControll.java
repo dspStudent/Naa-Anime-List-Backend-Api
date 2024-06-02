@@ -1,5 +1,4 @@
 package backend.anime.Controller;
-
 import backend.anime.Service.AnimeStatusService;
 import backend.anime.Util.GetUserName;
 import backend.anime.entites.userMaintain.AllAnimesStatus;
