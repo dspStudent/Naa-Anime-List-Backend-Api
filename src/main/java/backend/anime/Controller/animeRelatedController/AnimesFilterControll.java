@@ -26,7 +26,7 @@ public class AnimesFilterControll {
         return new ResponseEntity<>(animeService.getNameByName(name, page, pageSize), HttpStatus.OK);
     }
 
-    @GetMapping("/filter/")
+    @GetMapping("/filter")
     @ResponseBody
     public ResponseEntity<List<Animes>> getByFilter (
             @RequestParam(required = false) List<String> geners,
