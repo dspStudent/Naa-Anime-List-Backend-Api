@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
 @SpringBootApplication
 
 public class AnimeApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(AnimeApplication.class, args);
 	}
-
 }
