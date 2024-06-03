@@ -32,7 +32,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
 
-                .cors(cors->cors.configurationSource(configuration()))
+//                .cors(cors->cors.configurationSource(configuration()))
 
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/animes/**","auth/**")
@@ -73,12 +73,15 @@ public class SecurityConfig {
         return httpSecurity.build();
 
     }
-    public static CorsConfigurationSource configuration(){
-        CorsConfiguration corsConfiguration=new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("*"));
-        corsConfiguration.setAllowedHeaders(List.of("*"));
-//        corsConfiguration.setAllowCredentials(true);
-        return new UrlBasedCorsConfigurationSource();
-    }
+//    @Bean
+//    public  CorsConfigurationSource configuration(){
+//        CorsConfiguration corsConfiguration=new CorsConfiguration();
+//        corsConfiguration.setAllowedOrigins(List.of("*"));
+//        corsConfiguration.setAllowedMethods(List.of("*"));
+////        corsConfiguration.setAllowedHeaders(List.of("*"));
+////        corsConfiguration.setAllowCredentials(true);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", corsConfiguration);
+//        return source;
+//    }
 }
