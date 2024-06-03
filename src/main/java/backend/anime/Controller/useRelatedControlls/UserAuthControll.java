@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
 public class UserAuthControll {

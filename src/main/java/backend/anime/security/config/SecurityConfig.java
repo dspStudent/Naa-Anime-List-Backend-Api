@@ -9,8 +9,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +27,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+//                .cors(registry->registry.configurationSource(request -> {
+//                    CorsConfiguration config=new CorsConfiguration();
+//                    config.addAllowedOrigin("*");
+//                    config.addAllowedMethod("GET");
+//                    config.addAllowedMethod("POST");
+//                    config.addAllowedMethod("PUT"); // Allow specific HTTP methods
+//                    config.addAllowedHeader("*"); // Allow all headers
+//                    config.setAllowCredentials(true); // Allow credentials (e.g., cookies, authorization headers)
+//                    return config;
+//                }))
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/animes/**","auth/**")
                                 .permitAll()
@@ -34,6 +45,8 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider);
         ;
+
+
         //jwt filter
         httpSecurity.
                 addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
