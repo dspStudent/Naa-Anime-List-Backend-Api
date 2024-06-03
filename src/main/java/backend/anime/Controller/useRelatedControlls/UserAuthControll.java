@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/auth")
 public class UserAuthControll {

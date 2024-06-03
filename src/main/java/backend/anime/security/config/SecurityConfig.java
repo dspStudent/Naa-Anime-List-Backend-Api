@@ -13,6 +13,10 @@ import org.springframework.security.config.annotation.web.configurers.CorsConfig
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -27,16 +31,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-//                .cors(registry->registry.configurationSource(request -> {
-//                    CorsConfiguration config=new CorsConfiguration();
-//                    config.addAllowedOrigin("*");
-//                    config.addAllowedMethod("GET");
-//                    config.addAllowedMethod("POST");
-//                    config.addAllowedMethod("PUT"); // Allow specific HTTP methods
-//                    config.addAllowedHeader("*"); // Allow all headers
-//                    config.setAllowCredentials(true); // Allow credentials (e.g., cookies, authorization headers)
-//                    return config;
-//                }))
+
+                .cors(cors->cors.configurationSource(configuration()))
+
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/animes/**","auth/**")
                                 .permitAll()
@@ -74,5 +71,14 @@ public class SecurityConfig {
                     oauth.successHandler(oauth2SucsessHandlerimpl);
                 });
         return httpSecurity.build();
+
+    }
+    public static CorsConfigurationSource configuration(){
+        CorsConfiguration corsConfiguration=new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(List.of("*"));
+        corsConfiguration.setAllowedMethods(List.of("*"));
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        corsConfiguration.setAllowCredentials(true);
+        return new UrlBasedCorsConfigurationSource();
     }
 }
