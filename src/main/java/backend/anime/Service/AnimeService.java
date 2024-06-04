@@ -18,4 +18,6 @@ public interface AnimeService {
     User save(User user);
 
     List<Animes> getAnimesAll(Integer page, Integer pageSize);
+
+    Animes getAnimeByName(String name) throws EmptyContentGetException;
 }

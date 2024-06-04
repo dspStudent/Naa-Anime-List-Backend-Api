@@ -67,11 +67,11 @@ public class UserAuthControll {
         return "hlo";
     }
 
-//    @GetMapping("/loginCustom")
-//    public String login(){
-//        return "/loginUser";
-//  }
-//
+    @GetMapping("/loginCustom")
+    public String login(){
+        return "login";
+  }
+
        //@depricated since 2-6-24
 //    @GetMapping("/verfiy")
 //    public ResponseEntity<String> verfiy() throws MessagingException {

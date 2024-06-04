@@ -95,4 +95,9 @@ public class AnimeServiceimpl implements AnimeService{
         Pageable paging= PageRequest.of(page, pageSize);
         return animesRepostory.findAll(paging).getContent();
     }
+    @Override
+    public Animes getAnimeByName(String name) {
+        Animes animes= animesRepostory.findByTitleIgnoreCase(name);
+        return animes;
+    }
 }
