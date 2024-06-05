@@ -38,8 +38,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/home/**","/animes/**","auth/**")
                                 .permitAll()
-                                .requestMatchers(HttpMethod.OPTIONS, "/**")
-                                .permitAll()
+//                                .requestMatchers(HttpMethod.OPTIONS, "/**")
+//                                .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
