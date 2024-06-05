@@ -32,7 +32,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
 
-//                .cors(cors->cors.configurationSource(configuration()))
+                .cors(cors->cors.configurationSource(configuration()))
 
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/animes/**","auth/**")
@@ -64,15 +64,15 @@ public class SecurityConfig {
         return httpSecurity.build();
 
     }
-//    @Bean
-//    public  CorsConfigurationSource configuration(){
-//        CorsConfiguration corsConfiguration=new CorsConfiguration();
-//        corsConfiguration.setAllowedOrigins(List.of("*"));
-//        corsConfiguration.setAllowedMethods(List.of("*"));
-////        corsConfiguration.setAllowedHeaders(List.of("*"));
-////        corsConfiguration.setAllowCredentials(true);
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", corsConfiguration);
-//        return source;
-//    }
+    @Bean
+    public  CorsConfigurationSource configuration(){
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("https://anime-html-13pe.vercel.app")); // Replace with your exact frontend origin
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow common HTTP methods
+        config.setAllowedHeaders(List.of("Content-Type", "Authorization", "X-Requested-With")); // Allow necessary headers
+        config.setAllowCredentials(true); // Allow sending cookies if needed (be cautious)
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config); // Apply CORS configuration to all paths
+        return source;
+    }
 }
