@@ -67,7 +67,7 @@ public class SecurityConfig {
     @Bean
     public  CorsConfigurationSource configuration(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://anime-html-13pe.vercel.app", "http://localhost:*")); // Replace with your exact frontend origin
+        config.setAllowedOrigins(List.of("*")); // Replace with your exact frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow common HTTP methods
         config.setAllowedHeaders(List.of("Content-Type", "Authorization", "X-Requested-With")); // Allow necessary headers
         config.setAllowCredentials(true); // Allow sending cookies if needed (be cautious)
