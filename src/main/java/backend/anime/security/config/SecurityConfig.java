@@ -56,10 +56,9 @@ public class SecurityConfig {
                 .formLogin(login->
                         login.loginPage("https://anime-html-13pe.vercel.app"));
 
-
 //        oauth2
         httpSecurity
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(oauth->oauth.loginPage("/login"));
         httpSecurity
                 .oauth2Login(oauth->{
                     oauth.successHandler(oauth2SucsessHandlerimpl);
