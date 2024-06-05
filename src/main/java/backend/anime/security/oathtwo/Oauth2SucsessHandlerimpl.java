@@ -58,6 +58,6 @@ public class Oauth2SucsessHandlerimpl implements AuthenticationSuccessHandler {
 //        String funnyMessage = "Congratulations! You've been hacked";
 //        response.getWriter().write(funnyMessage);
 //        response.getWriter().flush();
-        response.sendRedirect("/animes/home");
+//        response.sendRedirect("/animes/home");
     }
 }
