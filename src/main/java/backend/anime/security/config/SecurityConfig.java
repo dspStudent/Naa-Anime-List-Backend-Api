@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .cors(cors->cors.configurationSource(configuration()))
 
                 .authorizeHttpRequests(
-                        auth->auth.requestMatchers("/animes/**","auth/**")
+                        auth->auth.requestMatchers("/home/**","/animes/**","auth/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
@@ -56,7 +56,7 @@ public class SecurityConfig {
 
 //        oauth2
         httpSecurity
-                .oauth2Login(outh->outh.loginPage("/auth/loginCustom"));
+                .oauth2Login(outh->outh.loginPage("https://anime-html-13pe.vercel.app"));
         httpSecurity
                 .oauth2Login(oauth->{
                     oauth.successHandler(oauth2SucsessHandlerimpl);
