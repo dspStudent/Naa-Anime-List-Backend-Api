@@ -32,7 +32,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
 
-                .cors(cors->cors.configurationSource(configuration()))
+//                .cors(cors->cors.configurationSource(configuration()))
 
                 .authorizeHttpRequests(
                         auth->auth.requestMatchers("/animes/**","auth/**")
@@ -51,7 +51,7 @@ public class SecurityConfig {
 //        login form
         httpSecurity
                 .formLogin(login->
-                        login.loginPage("https://anime-html-13pe.vercel.app").loginProcessingUrl("/auth/loginUser"));
+                        login.loginPage("https://anime-html-13pe.vercel.app"));
 
 
 //        oauth2
@@ -64,15 +64,15 @@ public class SecurityConfig {
         return httpSecurity.build();
 
     }
-    @Bean
-    public  CorsConfigurationSource configuration(){
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://anime-html-13pe.vercel.app")); // Replace with your exact frontend origin
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow common HTTP methods
-        config.setAllowedHeaders(List.of("Content-Type", "Authorization", "X-Requested-With")); // Allow necessary headers
-        config.setAllowCredentials(true); // Allow sending cookies if needed (be cautious)
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // Apply CORS configuration to all paths
-        return source;
-    }
+//    @Bean
+//    public  CorsConfigurationSource configuration(){
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of("https://anime-html-13pe.vercel.app")); // Replace with your exact frontend origin
+//        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow common HTTP methods
+//        config.setAllowedHeaders(List.of("Content-Type", "Authorization", "X-Requested-With")); // Allow necessary headers
+//        config.setAllowCredentials(true); // Allow sending cookies if needed (be cautious)
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config); // Apply CORS configuration to all paths
+//        return source;
+//    }
 }
