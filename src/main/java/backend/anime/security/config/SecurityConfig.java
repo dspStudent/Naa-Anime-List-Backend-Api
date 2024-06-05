@@ -59,7 +59,7 @@ public class SecurityConfig {
 
 //        oauth2
         httpSecurity
-                .oauth2Login(oauth->oauth.loginPage("/login"));
+                .oauth2Login(Customizer.withDefaults());
         httpSecurity
                 .oauth2Login(oauth->{
                     oauth.successHandler(oauth2SucsessHandlerimpl);
