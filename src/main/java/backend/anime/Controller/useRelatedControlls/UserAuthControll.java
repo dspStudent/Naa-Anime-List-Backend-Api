@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
@@ -62,15 +60,15 @@ public class UserAuthControll {
         return ResponseEntity.ok(authService.authenicateUser(authRequest));
     }
 
-    @GetMapping("/loginOauth")
-    public String loginOauth(){
-        return "hlo";
-    }
+//    @GetMapping("/loginOauth")
+//    public String loginOauth(){
+//        return "hlo";
+//    }
 
-    @GetMapping("/loginCustom")
-    public String login(){
-        return "login";
-  }
+//    @GetMapping("/loginCustom")
+//    public String login(){
+//        return "redirect:https://anime-html-13pe.vercel.app";
+//  }
 
        //@depricated since 2-6-24
 //    @GetMapping("/verfiy")

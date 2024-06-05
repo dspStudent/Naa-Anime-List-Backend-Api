@@ -14,6 +14,7 @@ public class JwtService {
     private final String SECRET="9a2f8c4e6b0d71f3e8b925a45747f894a3d6bc70fa8d5e21a15a6d8c3b9a0e7c";
     private final Long tokenExpireTime= (long) (15*60*1000);
     private final Long refreshTokenExpireTime=(long) (5*60*60*1000);
+
     public String getUserClaims(String token) {
         Claims claims=getAllClaims(token);
         return claims.getSubject();

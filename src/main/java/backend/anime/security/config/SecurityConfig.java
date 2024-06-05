@@ -50,22 +50,13 @@ public class SecurityConfig {
 
 //        login form
         httpSecurity
-                .formLogin(Customizer.withDefaults());
+                .formLogin(login->
+                        login.loginPage("https://anime-html-13pe.vercel.app").loginProcessingUrl("/auth/loginUser"));
 
-//        httpSecurity.formLogin(login -> login.successForwardUrl("/animes/"));
 
-//        //login form
-//        httpSecurity
-//                .formLogin(
-//                        login->
-//                                login
-//                                        .loginPage("/auth/loginCustom")
-//                                        .loginProcessingUrl("/auth/loginUser")
-//                );
-
-        //oauth2
+//        oauth2
         httpSecurity
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(outh->outh.loginPage("/auth/loginCustom"));
         httpSecurity
                 .oauth2Login(oauth->{
                     oauth.successHandler(oauth2SucsessHandlerimpl);

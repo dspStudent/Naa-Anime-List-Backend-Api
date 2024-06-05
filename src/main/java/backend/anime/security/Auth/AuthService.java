@@ -7,6 +7,8 @@ import backend.anime.entites.usersEntities.UserModal;
 import backend.anime.exception.exceptionImp.UserNotVerfiedException;
 import backend.anime.security.jwt.JwtService;
 import jakarta.mail.MessagingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -26,6 +28,7 @@ import java.time.LocalDateTime;
 @Service
 public class AuthService {
 
+    private static final Logger log = LoggerFactory.getLogger(AuthService.class);
     @Autowired
     MongoTemplate mongoTemplate;
     @Autowired
@@ -67,7 +70,7 @@ public class AuthService {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword(), userDetails.getAuthorities());
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
+        log.info(authRequest.toString());
         return AuthResponse.builder()
                 .token(jwtService.genrateToken(userDetails))
                 .refreshToken(jwtService.genrateRefreshToken(userDetails))
