@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .cors(cors->cors.configurationSource(configuration()))
 
                 .authorizeHttpRequests(
-                        auth->auth.requestMatchers("/home/**","/animes/**","auth/**")
+                        auth->auth.requestMatchers("/animes/**","auth/**")
                                 .permitAll()
 //                                .requestMatchers(HttpMethod.OPTIONS, "/**")
 //                                .permitAll()
@@ -64,12 +64,11 @@ public class SecurityConfig {
                     oauth.successHandler(oauth2SucsessHandlerimpl);
                 });
         return httpSecurity.build();
-
     }
     @Bean
     public  CorsConfigurationSource configuration(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*")); // Replace with your exact frontend origin
+        config.setAllowedOrigins(List.of("https://anime-html-13pe.vercel.app")); // Replace with your exact frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow common HTTP methods
         config.setAllowedHeaders(List.of("Content-Type", "Authorization", "X-Requested-With")); // Allow necessary headers
         config.setAllowCredentials(true); // Allow sending cookies if needed (be cautious)
