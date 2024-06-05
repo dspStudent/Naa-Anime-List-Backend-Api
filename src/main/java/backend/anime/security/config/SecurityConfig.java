@@ -56,7 +56,7 @@ public class SecurityConfig {
 
 //        oauth2
         httpSecurity
-                .oauth2Login(outh->outh.loginPage("https://anime-html-13pe.vercel.app/login"));
+                .oauth2Login(oauth->oauth.loginPage("/login"));
         httpSecurity
                 .oauth2Login(oauth->{
                     oauth.successHandler(oauth2SucsessHandlerimpl);
