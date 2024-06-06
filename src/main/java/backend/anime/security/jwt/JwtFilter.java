@@ -61,6 +61,7 @@ public class JwtFilter extends OncePerRequestFilter {
     //don't do filter
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return request.getServletPath().contains("/auth")
-                || request.getServletPath().contains("/animes");
+                || request.getServletPath().contains("/animes")
+                || request.getServletPath().contains("/home");
     }
 }
